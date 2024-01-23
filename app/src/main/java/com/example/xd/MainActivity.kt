@@ -33,69 +33,125 @@ class MainActivity : AppCompatActivity() {
         val n0: Button = findViewById(R.id.B0)
         val ndot: Button = findViewById(R.id.Bdot)
 
-        var nc = " "
+        var nc = "0"
         var om1 = ""
         var om2 = ""
         var o = ""
+        var dot:Boolean = false
 
         clear.setOnClickListener {
-            nc = ""
+            nc = "0"
             text.setText("0")
+            dot = false
 
         }
 
         n1.setOnClickListener {
-            nc += "1"
-            text.text = nc
+            if(nc == "0"){
+                nc ="1"
+                text.setText("1")
+            }else{
+                nc += "1"
+                text.text = nc
+            }
 
         }
 
         n2.setOnClickListener {
-            nc += "2"
-            text.text = nc
+            if(nc == "0"){
+                nc ="2"
+                text.setText("2")
+            }else{
+                nc += "2"
+                text.text = nc
+            }
         }
 
         n3.setOnClickListener {
-            nc += "3"
-            text.text = nc
+            if(nc == "0"){
+                nc ="3"
+                text.setText("3")
+            }else{
+                nc += "3"
+                text.text = nc
+            }
         }
 
         n4.setOnClickListener {
-            nc += "4"
-            text.text = nc
+            if(nc == "0"){
+                nc ="4"
+                text.setText("4")
+            }else{
+                nc += "4"
+                text.text = nc
+            }
         }
 
         n5.setOnClickListener {
-            nc += "5"
-            text.text = nc
+            if(nc == "0"){
+                nc ="5"
+                text.setText("5")
+            }else{
+                nc += "5"
+                text.text = nc
+            }
         }
 
         n6.setOnClickListener {
-            nc += "6"
-            text.text = nc
+            if(nc == "0"){
+                nc ="6"
+                text.setText("6")
+            }else{
+                nc += "6"
+                text.text = nc
+            }
         }
 
         n7.setOnClickListener {
-            nc += "7"
-            text.text = nc
+            if(nc == "0"){
+                nc ="7"
+                text.setText("7")
+            }else{
+                nc += "7"
+                text.text = nc
+            }
         }
 
         n8.setOnClickListener {
-            nc += "8"
-            text.text = nc
+            if(nc == "0"){
+                nc ="8"
+                text.setText("8")
+            }else{
+                nc += "8"
+                text.text = nc
+            }
         }
 
         n9.setOnClickListener {
-            nc += "9"
-            text.text = nc
+            if(nc == "0"){
+                nc ="9"
+                text.setText("9")
+            }else{
+                nc += "9"
+                text.text = nc
+            }
         }
 
         n0.setOnClickListener {
-            if(nc == ""){
-                nc =""
+            if(nc == "0"){
+                nc ="0"
+                text.setText("0")
             }else{
-                nc += 0
+                nc += "0"
                 text.text = nc
+            }
+        }
+
+        ndot.setOnClickListener {
+            if (dot == false) {
+                nc += "."
+                text.setText(nc)
+                dot = true
             }
         }
 
@@ -113,6 +169,7 @@ class MainActivity : AppCompatActivity() {
             om1 = nc
             nc = ""
             text.text = "0"
+            dot = false
         }
 
         minus.setOnClickListener {
@@ -120,6 +177,7 @@ class MainActivity : AppCompatActivity() {
             om1 = nc
             nc = ""
             text.text = "0"
+            dot = false
         }
 
         multiply.setOnClickListener {
@@ -127,6 +185,7 @@ class MainActivity : AppCompatActivity() {
             om1 = nc
             nc = ""
             text.text = "0"
+            dot = false
         }
 
         divder.setOnClickListener {
@@ -134,6 +193,7 @@ class MainActivity : AppCompatActivity() {
             om1 = nc
             nc = ""
             text.text = "0"
+            dot = false
         }
 
         modulo.setOnClickListener {
@@ -141,40 +201,36 @@ class MainActivity : AppCompatActivity() {
             om1 = nc
             nc = ""
             text.text = "0"
+            dot = false
         }
 
 
-        fun calculateResult() {
+        equal.setOnClickListener {
+            om2 = nc
             var result = 0.0
             try {
-                if (om2.isNotEmpty()) {
-                    when (o) {
-                        "+" -> result = om1.toDouble() + om2.toDouble()
-                        "-" -> result = om1.toDouble() - om2.toDouble()
-                        "*" -> result = om1.toDouble() * om2.toDouble()
-                        "/" -> {
-                            if (om2.toDouble() == 0.0) {
-                                text.text = "Error: Division by zero"
-                                return
-                            } else {
-                                result = om1.toDouble() / om2.toDouble()
-                            }
-                        }
-                        "%" -> result = om1.toDouble() % om2.toDouble()
-                    }
-                } else {
+                when (o) {
 
-                    result = om1.toDouble()
+                    "+" -> result = om1.toDouble() + om2.toDouble()
+                    "-" -> result = om1.toDouble() - om2.toDouble()
+                    "*" -> result = om1.toDouble() * om2.toDouble()
+                    "/" -> {
+                        if (om2.toDouble() == 0.0) {
+                            text.text = "Error: Division by zero"
+                        } else {
+                            result = om1.toDouble() / om2.toDouble()
+                        }
+                    }
+                    "%" -> result = om1.toDouble() % om2.toDouble()
                 }
 
-                text.text = result.toString()
+                text.text = result.toString() // Display the result
             } catch (e: NumberFormatException) {
                 text.text = "Error: Invalid input"
             }
-        }
-        equal.setOnClickListener {
-            om2 = nc
-            calculateResult()
+
+            om1 = result.toString()
+            nc = result.toString()
         }
 
     }
